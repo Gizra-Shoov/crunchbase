@@ -58,15 +58,31 @@ describe('Visual monitor testing', function() {
     shoovWebdrivercss.after(done);
   });
 
-  it('should show the home page',function(done) {
+  it('should show the homepage page',function(done) {
     client
       .url(baseUrl)
+      .pause(2000)
       .webdrivercss(testName + '.homepage', {
         name: '1',
-        exclude: [],
-        remove: [],
-        hide: [],
-        screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
+        exclude:
+          [
+            // ad
+            '#ad-component',
+            '#hero-ad'
+          ],
+        remove:
+          [
+            // Feedback
+            '.uv-bottom-right',
+            // testimonials
+            '.testimonials'
+          ],
+        hide:
+          [
+            '#ember567 > div.discover-banner > span',
+            '#mobile-search'
+          ],
+        screenWidth: selectedCaps == 'chrome' ? [960] : undefined,
       }, resultsCallback)
       .call(done);
   });
